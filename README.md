@@ -214,21 +214,9 @@ Bu proje MIT Lisansı altında lisanslanmıştır - detaylar için [LICENSE](LIC
 Yardıma mı ihtiyacınız var? Seçenekleriniz:
 
 - 📧 **E-posta**: destek@pixgen.com
-- 🐛 **Sorunlar**: [GitHub Issues](https://github.com/kullaniciadi/pixgen/issues)
-- 💬 **Tartışmalar**: [GitHub Discussions](https://github.com/kullaniciadi/pixgen/discussions)
-- 📚 **Dokümantasyon**: [Wiki](https://github.com/kullaniciadi/pixgen/wiki)
-
-## 🚀 Yol Haritası
-
-### Yaklaşan Özellikler
-- [ ] Kullanıcı hesapları ve görsel geçmişi
-- [ ] Toplu görsel üretimi
-- [ ] Özel model ince ayarı
-- [ ] Geliştiriciler için API endpoint'i
-- [ ] Mobil uygulama sürümleri
-- [ ] Gelişmiş düzenleme araçları
-- [ ] Topluluk galerisi
-- [ ] Premium özellikler
+- 🐛 **Sorunlar**: [GitHub Issues](https://github.com/CorenGt/Pixgen/issues)
+- 💬 **Tartışmalar**: [GitHub Discussions](https://github.com/CorenGt/Pixgen/discussions)
+- 📚 **Dokümantasyon**: [Wiki](https://github.com/CorenGt/Pixgen)
 
 ---
 
