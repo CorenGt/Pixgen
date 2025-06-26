@@ -4,8 +4,8 @@
 
 Pixgen, basit metin açıklamalarından nefes kesen görseller oluşturmak için Stable Diffusion XL teknolojisini kullanan modern, web tabanlı bir AI görsel üreticidir. Flask ile geliştirilmiş, animasyonlu grid arka planlar ve muhteşem görsel efektler içeren şık ve modern bir arayüze sahiptir.
 
-![Pixgen Generated](static/images/generated_1.png)
-![Pixgen Generated_2](static/images/generated_2.png)
+![Pixgen Generated](generated_1.png)
+![Pixgen Generated_2](generated_2.png)
 
 ## ✨ Özellikler
 
