@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block title %}Verba Images | About Us{% endblock %}
+
+{% block navbar_class %}navbar-main-sec w-100 float-left index-page-navbar{% endblock %}
+
+{% block content %}
+<!-- banner section -->
+<section class="banner-sec about-banner w-100 float-left bg-light-black">
+    <div class="wrapper2"> 
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-0 order-2">
+                <div class="banner-left-sec">
+                    <span class="d-block" data-aos="fade-up" data-aos-duration="600">ABOUT US</span>
+                    <h2 data-aos="fade-up" data-aos-duration="600">Architecting the Digital Future</h2>
+                    <p data-aos="fade-up" data-aos-duration="600">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="generic-btn" data-aos="fade-up" data-aos-duration="600">
+                        <a href="{{ url_for('index') }}">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="banner-right-sec">
+                    <figure class="mb-0" data-aos="fade-up" data-aos-duration="600">
+                        <img src="{{ url_for('static', filename='images/fox-img.jpg') }}" alt="fox-img">
+                    </figure>
+                    <div class="banner-review-box" data-aos="fade-up" data-aos-duration="600">
+                        <span>People</span>
+                        <div class="counting-box">
+                            100+
+                        </div>
+                        <p>Best Reviews</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="social-box">
+        <ul class="mb-0 list-unstyled">
+            <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+            <li><a href="#"><i class="fas fa-image"></i></a></li>
+            <li><a href="#"><i class="fas fa-comment-alt"></i></a></li>
+        </ul>
+    </div>
+</section>
+<!-- banner section -->
+
+<!-- services section-->
+<section class="service-slider-sec w-100 float-left padding-top padding-bottom bg-light-black">
+    <div class="generic-title text-center">
+        <span data-aos="fade-up" data-aos-duration="600">WHAT WE DO</span>
+        <h2 data-aos="fade-up" data-aos-duration="600">Unleash the Potential of Al Development
+            Tools Crafted with Brilliance, Style, Quality,
+            and Creativity</h2>
+    </div>
+    <div class="service-slider-box" data-aos="fade-up" data-aos-duration="600">
+        <div id="owlsliderone" class="owl-carousel owl-theme">
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img1.png') }}" alt="slider-img1">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img2.png') }}" alt="slider-img2">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img3.png') }}" alt="slider-img3">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img4.png') }}" alt="slider-img4">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img5.png') }}" alt="slider-img5">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img1.png') }}" alt="slider-img1">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img2.png') }}" alt="slider-img2">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img3.png') }}" alt="slider-img3">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img4.png') }}" alt="slider-img4">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img5.png') }}" alt="slider-img5">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img1.png') }}" alt="slider-img1">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img2.png') }}" alt="slider-img2">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img3.png') }}" alt="slider-img3">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img4.png') }}" alt="slider-img4">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img5.png') }}" alt="slider-img5">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img1.png') }}" alt="slider-img1">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img2.png') }}" alt="slider-img2">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img3.png') }}" alt="slider-img3">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img4.png') }}" alt="slider-img4">
+                </figure>
+            </div>
+            <div class="item">
+                <figure class="mb-0">
+                    <img src="{{ url_for('static', filename='images/slider-img5.png') }}" alt="slider-img5">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- services section-->
+
+<!-- collection section-->
+<section class="collection-section about-collection-sec w-100 float-left padding-bottom padding-top bg-light-black">
+    <div class="wrapper2">
+        <div class="generic-title text-center">
+            <span data-aos="fade-up" data-aos-duration="600">OUR BENEFITS</span>
+            <h2 data-aos="fade-up" data-aos-duration="600">AI Benefits Will Impress You</h2>
+        </div>
+        <div class="collection-inner-sec">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="collection-box bg-dark-black">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/collection-img1.png') }}" alt="collection-img1">
+                        </figure>
+                        <h4>Simple to Use</h4>
+                        <p>Adipiscing elit, sed do eiusmod
+                            dolor site enime et magna aliqua
+                            labore dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="collection-box bg-dark-black">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/collection-img2.png') }}" alt="collection-img2">
+                        </figure>
+                        <h4>Hightly Accurate</h4>
+                        <p>Adipiscing elit, sed do eiusmod
+                            dolor site enime et magna aliqua
+                            labore dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="collection-box bg-dark-black">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/collection-img3.png') }}" alt="collection-img3">
+                        </figure>
+                        <h4>Design Effectively</h4>
+                        <p>Adipiscing elit, sed do eiusmod
+                            dolor site enime et magna aliqua
+                            labore dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="collection-box bg-dark-black">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/collection-img4.png') }}" alt="collection-img4">
+                        </figure>
+                        <h4>Share Easily</h4>
+                        <p>Adipiscing elit, sed do eiusmod
+                            dolor site enime et magna aliqua
+                            labore dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- collection section-->
+
+<!-- about section-->
+<section class="about-main-sec visual-graphics-box w-100 float-left padding-top bg-light-black">
+    <div class="wrapper2">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="visual-left-sec position-relative">
+                    <figure class="mb-0" data-aos="fade-up" data-aos-duration="600">
+                        <img src="{{ url_for('static', filename='images/eagle-img.jpg') }}" alt="eagle-img">
+                    </figure>
+                    <div class="visual-small-img" data-aos="fade-up" data-aos-duration="600">
+                        <figure class="mb-0">
+                            <img src="{{ url_for('static', filename='images/visual-small-img.jpg') }}" alt="visual-small-img">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center justify-content-center">
+                <div class="about-details-box">
+                    <div class="generic-title">
+                        <span data-aos="fade-up" data-aos-duration="600">VISUAL GRAPHICS</span>
+                        <h2 class="mb-0" data-aos="fade-up" data-aos-duration="600">Enabling Visual
+                            AI For Everyone</h2>
+                    </div>
+                    <p data-aos="fade-up" data-aos-duration="600">Our Tools Simplify And Accelerate Workflows,<br> Foster Creativity, And Enable Others To Create <br> New Products.</p>
+                    <ul class="list-unstyled">
+                        <li class="position-relative" data-aos="fade-up" data-aos-duration="600"><figure class="mb-0"><img src="{{ url_for('static', filename='images/about-tick-img.png') }}" alt="about-tick-img"></figure> Seamless integration</li>
+                        <li class="position-relative" data-aos="fade-up" data-aos-duration="600"><figure class="mb-0"><img src="{{ url_for('static', filename='images/about-tick-img.png') }}" alt="about-tick-img"></figure> Analyze the chats and improvize</li>
+                        <li class="position-relative" data-aos="fade-up" data-aos-duration="600"><figure class="mb-0"><img src="{{ url_for('static', filename='images/about-tick-img.png') }}" alt="about-tick-img"></figure> Custom-trained on your data</li>
+                        <li class="position-relative" data-aos="fade-up" data-aos-duration="600"><figure class="mb-0"><img src="{{ url_for('static', filename='images/about-tick-img.png') }}" alt="about-tick-img"></figure> Flexible branding options</li>
+                    </ul>
+                    <div class="generic-btn" data-aos="fade-up" data-aos-duration="600">
+                        <a href="{{ url_for('service') }}">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about section-->
+
+<!-- video section-->
+<div class="video-sec w-100 float-left" data-aos="fade-up" data-aos-duration="600">
+    <div class="box-video">
+        <div class="bg-video">
+            <div class="bt-play"></div>
+        </div>
+        <div class="video-container">
+            <iframe width="590" height="332" src="https://www.youtube.com/embed/HK6y8DAPN_0?rel=0&amp;showinfo=0"></iframe>
+        </div>
+    </div>
+</div>
+<!-- video section-->
+
+
+{% endblock %}

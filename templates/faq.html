@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Verba Images | FAQ{% endblock %}
+
+{% block navbar_class %}navbar-main-sec w-100 float-left index-page-navbar{% endblock %}
+
+{% block content %}
+<!-- banner section -->
+<section class="w-100 float-left banner-sec sub-banner about-banner faq-banner">
+        <div class="wrapper2">
+            <div class="sub-banner-inner-con">
+                <div class="sub-banner-img">
+                    <figure class="mb-0" data-aos="fade-up" data-aos-duration="600">
+                        <img src="{{ url_for('static', filename='images/sub-banner-img1.jpg') }}" alt="sub-banner-img">
+                    </figure>
+                </div>
+                <div class="sub-banner-title text-center">
+                    <h1 class="mb-0" data-aos="fade-up" data-aos-duration="600">FAQ</h1>
+                </div>
+                <div class="sub-banner-img">
+                    <figure class="mb-0" data-aos="fade-up" data-aos-duration="600">
+                        <img src="{{ url_for('static', filename='images/sub-banner-img2.jpg') }}" alt="sub-banner-img">
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="social-box">
+            <ul class="mb-0 list-unstyled">
+                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="#"><i class="fas fa-image"></i></a></li>
+                <li><a href="#"><i class="fas fa-comment-alt"></i></a></li>
+            </ul>
+        </div>
+    </section>
+    <!-- banner section -->
+    <section class="w-100 float-left faq-con faq-page-con pt-0">
+        <div class="wrapper2">
+            <div class="generic-title text-center">
+                <span class="text-uppercase" data-aos="fade-up" data-aos-duration="600">FAQ</span>
+                <h2 data-aos="fade-up" data-aos-duration="600">Verba Images FAQs</h2>
+            </div>
+            <div class="faq-box">
+                <div class="faq-content">
+                    <div id="accordion">
+                        <div class="card" data-aos="fade-up" data-aos-duration="600">
+                          <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                What is Verba Images Graphic Generator?
+                              </button>
+                            </h5>
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
+                                suspendisse ultrices gravida.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card" data-aos="fade-up" data-aos-duration="600">
+                          <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                What's the Standard Image Size?
+                              </button>
+                            </h5>
+                          </div>
+                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
+                                suspendisse ultrices gravida.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card" data-aos="fade-up" data-aos-duration="600">
+                          <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What photo formats are supported?
+                              </button>
+                            </h5>
+                          </div>
+                          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
+                                suspendisse ultrices gravida.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card mb-0" data-aos="fade-up" data-aos-duration="600">
+                            <div class="card-header" id="headingfour">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
+                                    How can I get the best results?
+                                </button>
+                              </h5>
+                            </div>
+                            <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordion">
+                              <div class="card-body">
+                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                  tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
+                                  suspendisse ultrices gravida.
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blogs-section w-100 float-left padding-bottom bg-light-black">
+        <div class="wrapper2">
+            <div class="generic-title text-center">
+                <span data-aos="fade-up" data-aos-duration="600">LATEST POSTS</span>
+                <h2 data-aos="fade-up" data-aos-duration="600">News &amp; Articles</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="blog-inner-box bg-dark-black">
+                        <figure class="mb-0">
+                            <img src="{{ url_for('static', filename='images/blog-img1.png') }}" alt="blog-img1">
+                        </figure>
+                        <div class="blog-text-con">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-block">
+                                    <figure class="mb-0">
+                                        <img src="{{ url_for('static', filename='images/blog-profile-img.png') }}" alt="blog-profile-img">
+                                    </figure>
+                                </li>
+                                <li class="d-inline-block"><span>Caroline Forsey</span></li>
+                            </ul>
+                            <a href="single-blog.html">
+                                <h4>The Top Benefits of AI for Marketers, State of AI Data</h4>
+                            </a>
+                            <div class="posted-details">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-inline-block"><i class="fas fa-calendar-alt"></i> June 25, 2023</li>
+                                    <li class="d-inline-block mr-0"><i class="fas fa-comments"></i> 0 Comments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="blog-inner-box bg-dark-black">
+                        <figure class="mb-0">
+                            <img src="{{ url_for('static', filename='images/blog-img2.png') }}" alt="blog-img2">
+                        </figure>
+                        <div class="blog-text-con">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-block">
+                                    <figure class="mb-0">
+                                        <img src="{{ url_for('static', filename='images/blog-profile-img.png') }}" alt="blog-profile-img">
+                                    </figure>
+                                </li>
+                                <li class="d-inline-block"><span>Caroline Forsey</span></li>
+                            </ul>
+                            <a href="single-blog.html">
+                                <h4>AI Tools to Help You Grow Your AI Graphics Business</h4>
+                            </a>
+                            <div class="posted-details">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-inline-block"><i class="fas fa-calendar-alt"></i> June 20, 2023</li>
+                                    <li class="d-inline-block mr-0"><i class="fas fa-comments"></i> 0 Comments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="blog-inner-box bg-dark-black">
+                        <figure class="mb-0">
+                            <img src="{{ url_for('static', filename='images/blog-img3.png') }}" alt="blog-img3">
+                        </figure>
+                        <div class="blog-text-con">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-block">
+                                    <figure class="mb-0">
+                                        <img src="{{ url_for('static', filename='images/blog-profile-img.png') }}" alt="blog-profile-img">
+                                    </figure>
+                                </li>
+                                <li class="d-inline-block"><span>Caroline Forsey</span></li>
+                            </ul>
+                            <a href="single-blog.html">
+                                <h4>When Is the Best Time to Post on Instagram in 2023?</h4>
+                            </a>
+                            <div class="posted-details">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-inline-block"><i class="fas fa-calendar-alt"></i> June 25, 2023</li>
+                                    <li class="d-inline-block mr-0"><i class="fas fa-comments"></i> 0 Comments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

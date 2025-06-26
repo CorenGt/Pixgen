@@ -1,0 +1,977 @@
+{% extends "base.html" %}
+
+{% block title %}🎨 Pixgen | Modern AI Image Generator{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/custom-generator.css') }}">
+<style>
+    /* Modern One-Page Design Styles */
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+        --neon-accent: #00fcdb;
+        --neon-secondary: #ff6b6b;
+        --text-light: rgba(255, 255, 255, 0.9);
+        --text-muted: rgba(255, 255, 255, 0.6);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: var(--dark-gradient);
+        overflow-x: hidden;
+    }
+
+    /* Modern Navbar */
+    .navbar-main-sec {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-brand h3 {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        font-size: 2rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        background: var(--dark-gradient);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 184, 230, 0.3) 0%, transparent 50%);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--accent-gradient);
+        padding: 15px 30px;
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .hero-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(245, 87, 108, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Modern Slider */
+    .modern-slider {
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(20px);
+    }
+
+    .slider-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .slider-track {
+        display: flex;
+        animation: slide 15s infinite linear;
+    }
+
+    .slider-item {
+        min-width: 300px;
+        height: 200px;
+        margin: 0 15px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .slider-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(0, 252, 219, 0.3);
+    }
+
+    .slider-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
+    /* Image Generator Section */
+    .generator-section {
+        padding: 100px 0;
+        background: var(--dark-gradient);
+        position: relative;
+    }
+
+    .generator-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+    }
+
+    .generator-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .prompt-suggestions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .prompt-suggestion {
+        background: var(--primary-gradient);
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .prompt-suggestion:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .modern-input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px 20px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .modern-input:focus {
+        outline: none;
+        border-color: var(--neon-accent);
+        box-shadow: 0 0 20px rgba(0, 252, 219, 0.3);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .modern-select {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 15px 20px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .generate-btn {
+        background: var(--accent-gradient);
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .generate-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(245, 87, 108, 0.4);
+    }
+
+    /* About Section */
+    .about-section {
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: var(--neon-accent);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        padding: 100px 0;
+        background: var(--dark-gradient);
+    }
+
+    .faq-item {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .faq-question {
+        background: none;
+        border: none;
+        color: white;
+        padding: 25px 30px;
+        width: 100%;
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .faq-question:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .faq-answer {
+        padding: 0 30px 25px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        display: none;
+    }
+
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        padding: 100px 0;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .contact-form {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+    }
+
+    .contact-btn {
+        background: var(--primary-gradient);
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .contact-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Section Titles */
+    .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
+    }
+
+    .section-title p {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+        }
+        
+        .prompt-suggestions {
+            grid-template-columns: 1fr;
+        }
+        
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">🎨 Create Amazing AI Images</h1>
+            <p class="hero-subtitle">✨ Transform your imagination into stunning visuals with cutting-edge AI technology</p>
+            <a href="#generator" class="hero-cta">
+                <i class="fas fa-magic"></i>
+                Start Creating Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Modern Slider Section -->
+<section class="modern-slider">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>🖼️ AI Generated Gallery</h2>
+            <p>Explore the endless possibilities of AI-powered image generation</p>
+        </div>
+        <div class="slider-container animate-on-scroll">
+            <div class="slider-track">
+                <!-- Duplicate items for seamless loop -->
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img1.png') }}" alt="AI Art 1">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img2.png') }}" alt="AI Art 2">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img3.png') }}" alt="AI Art 3">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img4.png') }}" alt="AI Art 4">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img5.png') }}" alt="AI Art 5">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/design-img1.jpg') }}" alt="AI Art 6">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/design-img2.jpg') }}" alt="AI Art 7">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/design-img3.jpg') }}" alt="AI Art 8">
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img1.png') }}" alt="AI Art 1">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img2.png') }}" alt="AI Art 2">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img3.png') }}" alt="AI Art 3">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img4.png') }}" alt="AI Art 4">
+                </div>
+                <div class="slider-item">
+                    <img src="{{ url_for('static', filename='images/slider-img5.png') }}" alt="AI Art 5">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Image Generator Section -->
+<section id="generator" class="generator-section">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>🤖 AI Image Generator</h2>
+            <p>🎯 Turn your ideas into stunning visuals with our advanced AI technology</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="generator-container animate-on-scroll">
+                    <h3 class="text-center mb-4">💡 Quick Prompts</h3>
+                    <div class="prompt-suggestions">
+                        <button class="prompt-suggestion" onclick="setPrompt('🌅 A beautiful sunset over mountains, digital art style, vibrant colors')">
+                            🌅 Sunset Mountains
+                        </button>
+                        <button class="prompt-suggestion" onclick="setPrompt('🦄 A magical unicorn in an enchanted forest, fantasy art, mystical atmosphere')">
+                            🦄 Magical Unicorn
+                        </button>
+                        <button class="prompt-suggestion" onclick="setPrompt('🏙️ Futuristic cityscape at night, cyberpunk style, neon lights')">
+                            🏙️ Cyberpunk City
+                        </button>
+                        <button class="prompt-suggestion" onclick="setPrompt('🌸 Cherry blossoms in spring, anime style, soft pastel colors')">
+                            🌸 Cherry Blossoms
+                        </button>
+                        <button class="prompt-suggestion" onclick="setPrompt('🐺 Majestic wolf in snowy landscape, realistic style, dramatic lighting')">
+                            🐺 Majestic Wolf
+                        </button>
+                    </div>
+                    
+                    <form id="imageGeneratorForm" class="mt-4">
+                        <div class="mb-4">
+                            <label for="prompt" class="form-label">
+                                <h5>📝 Describe Your Image:</h5>
+                            </label>
+                            <textarea id="prompt" name="prompt" rows="4" class="modern-input" 
+                                placeholder="🎨 Describe what you want to create... Be as detailed as possible for better results!"
+                                required></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="size" class="form-label">
+                                <h5>📏 Image Size:</h5>
+                            </label>
+                            <select id="size" name="size" class="modern-select">
+                                <option value="512x512">📱 512×512 (Square - Social Media)</option>
+                                <option value="1024x1024" selected>🖥️ 1024×1024 (HD Square)</option>
+                                <option value="1024x512">🖼️ 1024×512 (Landscape)</option>
+                                <option value="512x1024">📄 512×1024 (Portrait)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="generate-btn">
+                            <i class="fas fa-magic"></i>
+                            ✨ Generate Amazing Image
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Image Preview Area -->
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+                <div id="imagePreview" class="animate-on-scroll">
+                    <div class="generator-container text-center">
+                        <div style="padding: 60px 20px;">
+                            <i class="fas fa-image" style="font-size: 4rem; color: var(--neon-accent); margin-bottom: 20px;"></i>
+                            <h4 style="color: var(--text-light); margin-bottom: 15px;">🎭 Your Masterpiece Will Appear Here</h4>
+                            <p style="color: var(--text-muted);">Choose a prompt or write your own description to start creating!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="loadingSpinner" class="animate-on-scroll" style="display: none;">
+                    <div class="generator-container text-center">
+                        <div style="padding: 60px 20px;">
+                            <i class="fas fa-magic fa-spin" style="font-size: 4rem; color: var(--neon-accent); margin-bottom: 20px;"></i>
+                            <h4 style="color: var(--text-light); margin-bottom: 15px;">🎨 Creating Your Masterpiece...</h4>
+                            <p style="color: var(--text-muted);">Please wait while our AI works its magic ✨</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>🚀 About Pixgen</h2>
+            <p>Empowering creativity through advanced AI technology</p>
+        </div>
+        
+        <div class="feature-grid">
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🤖</div>
+                <h4 style="color: var(--text-light); margin-bottom: 15px;">Advanced AI</h4>
+                <p style="color: var(--text-muted);">Powered by cutting-edge Stable Diffusion XL technology for stunning, high-quality image generation.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">⚡</div>
+                <h4 style="color: var(--text-light); margin-bottom: 15px;">Lightning Fast</h4>
+                <p style="color: var(--text-muted);">Generate beautiful images in seconds with our optimized AI pipeline and modern infrastructure.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🎨</div>
+                <h4 style="color: var(--text-light); margin-bottom: 15px;">Creative Freedom</h4>
+                <p style="color: var(--text-muted);">Express your imagination without limits. From realistic photos to abstract art, create anything you can imagine.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🔧</div>
+                <h4 style="color: var(--text-light); margin-bottom: 15px;">Easy to Use</h4>
+                <p style="color: var(--text-muted);">Simple interface designed for everyone. No technical skills required - just describe what you want!</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">📱</div>
+                <h4 style="color: var(--text-light); margin-bottom: 15px;">Mobile Friendly</h4>
+                <p style="color: var(--text-muted);">Create amazing images on any device. Our responsive design works perfectly on phones, tablets, and desktops.</p>
+            </div>
+            
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">🌟</div>
+                <h4 style="color: var(--text-light); margin-bottom: 15px;">High Quality</h4>
+                <p style="color: var(--text-muted);">Professional-grade results with multiple resolution options. Perfect for social media, print, or web use.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="faq-section">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>❓ Frequently Asked Questions</h2>
+            <p>Everything you need to know about Pixgen AI</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>🤔 What is Pixgen AI Image Generator?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Pixgen is an advanced AI-powered image generation platform that uses Stable Diffusion XL technology to create stunning, high-quality images from text descriptions. Simply describe what you want, and our AI will bring your vision to life!
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>📏 What image sizes are available?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        We offer multiple resolution options: 512×512 (perfect for social media), 1024×1024 (HD square), 1024×512 (landscape), and 512×1024 (portrait). Choose the size that best fits your needs!
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>💡 How can I get the best results?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Be specific and detailed in your descriptions! Include art styles (like "digital art", "oil painting", "photorealistic"), lighting conditions, colors, and mood. Try our quick prompts for inspiration!
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>⏱️ How long does it take to generate an image?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Most images are generated within 10-30 seconds, depending on complexity and server load. Our optimized AI pipeline ensures fast, high-quality results every time.
+                    </div>
+                </div>
+                
+                <div class="faq-item animate-on-scroll">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>💰 Is Pixgen free to use?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        Yes! Pixgen is completely free to use. Generate as many images as you want without any limitations. We believe in making AI art accessible to everyone.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="section-title animate-on-scroll">
+            <h2>📞 Get In Touch</h2>
+            <p>Have questions or feedback? We'd love to hear from you!</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="contact-form animate-on-scroll">
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" style="color: var(--text-light);">👤 Your Name</label>
+                                <input type="text" name="name" class="modern-input" placeholder="Enter your name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" style="color: var(--text-light);">📧 Email Address</label>
+                                <input type="email" name="email" class="modern-input" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: var(--text-light);">📱 Phone Number (Optional)</label>
+                            <input type="tel" name="phone" class="modern-input" placeholder="Enter your phone number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" style="color: var(--text-light);">💬 Your Message</label>
+                            <textarea name="message" rows="5" class="modern-input" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        <button type="submit" class="contact-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="text-center mt-5 animate-on-scroll">
+                    <h4 style="color: var(--text-light); margin-bottom: 20px;">🌍 Connect With Us</h4>
+                    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                        <div style="color: var(--text-muted);">
+                            <i class="fas fa-map-marker-alt" style="color: var(--neon-accent);"></i>
+                            İstanbul, Turkey
+                        </div>
+                        <div style="color: var(--text-muted);">
+                            <i class="fas fa-phone" style="color: var(--neon-accent);"></i>
+                            +90 537 655 5005
+                        </div>
+                        <div style="color: var(--text-muted);">
+                            <i class="fas fa-envelope" style="color: var(--neon-accent);"></i>
+                            batuhanyilmaz0011@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<!-- AI Image Generator JavaScript -->
+<script src="{{ url_for('static', filename='js/image-generator.js') }}"></script>
+
+<script>
+// Set prompt function for quick suggestions
+function setPrompt(prompt) {
+    document.getElementById('prompt').value = prompt;
+    document.getElementById('prompt').focus();
+}
+
+// FAQ toggle function
+function toggleFaq(element) {
+    const faqItem = element.parentElement;
+    const isActive = faqItem.classList.contains('active');
+    
+    // Close all FAQ items
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.fas').classList.replace('fa-chevron-up', 'fa-chevron-down');
+    });
+    
+    // Toggle current item
+    if (!isActive) {
+        faqItem.classList.add('active');
+        element.querySelector('.fas').classList.replace('fa-chevron-down', 'fa-chevron-up');
+    }
+}
+
+// Contact form handler
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    try {
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        const response = await fetch('/contact-form', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showNotification('✅ Message sent successfully! We\'ll get back to you soon.', 'success');
+            this.reset();
+        } else {
+            showNotification('❌ Failed to send message. Please try again.', 'error');
+        }
+    } catch (error) {
+        showNotification('❌ Network error. Please check your connection.', 'error');
+    } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// Smooth scroll for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Animate elements on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+});
+
+// Modern notification function
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #4CAF50, #45a049)' : 
+                     type === 'error' ? 'linear-gradient(135deg, #f44336, #da190b)' : 
+                     'linear-gradient(135deg, #2196F3, #0b7dda)'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        z-index: 10000;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 350px;
+        backdrop-filter: blur(20px);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Show animation
+    setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Hide after 5 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 5000);
+}
+
+// Add some sparkle effects
+document.addEventListener('mousemove', function(e) {
+    if (Math.random() > 0.95) {
+        createSparkle(e.clientX, e.clientY);
+    }
+});
+
+function createSparkle(x, y) {
+    const sparkle = document.createElement('div');
+    sparkle.innerHTML = '✨';
+    sparkle.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        pointer-events: none;
+        z-index: 9999;
+        animation: sparkle 1s ease-out forwards;
+        font-size: 12px;
+    `;
+    
+    document.body.appendChild(sparkle);
+    
+    setTimeout(() => {
+        if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+        }
+    }, 1000);
+}
+
+// Add sparkle animation
+const sparkleKeyframes = `
+    @keyframes sparkle {
+        0% {
+            opacity: 1;
+            transform: scale(0) rotate(0deg);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1) rotate(180deg);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0) rotate(360deg);
+        }
+    }
+`;
+
+const style = document.createElement('style');
+style.textContent = sparkleKeyframes;
+document.head.appendChild(style);
+</script>
+{% endblock %}

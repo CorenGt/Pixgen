@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Verba Images | Our Team{% endblock %}
+
+{% block navbar_class %}navbar-main-sec w-100 float-left index-page-navbar{% endblock %}
+
+{% block content %}
+<!-- banner section -->
+<section class="banner-sec about-banner pricing-banner team-banner w-100 float-left bg-light-black">
+        <div class="wrapper2">
+            <div class="generic-title text-center">
+                <span data-aos="fade-up" data-aos-duration="600">WHO ARE WE</span>
+                <h2 data-aos="fade-up" data-aos-duration="600">Creative Team</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="member-box text-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/member-img1.png') }}" alt="member-img1">
+                        </figure>
+                        <h4>George Marlowe</h4>
+                        <span>Creative Director</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="member-box text-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/member-img2.png') }}" alt="member-img2">
+                        </figure>
+                        <h4>Geneva Morris</h4>
+                        <span>Creative Artist</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="member-box text-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/member-img3.png') }}" alt="member-img3">
+                        </figure>
+                        <h4>Stephen Michael</h4>
+                        <span>Graphic Designer</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="member-box text-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/member-img4.png') }}" alt="member-img4">
+                        </figure>
+                        <h4>Shawn Dellinger</h4>
+                        <span>UI Designer</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="member-box text-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/member-img5.png') }}" alt="member-img5">
+                        </figure>
+                        <h4>Felicitas Creager</h4>
+                        <span>Product Designer</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600">
+                    <div class="member-box text-center">
+                        <figure>
+                            <img src="{{ url_for('static', filename='images/member-img6.png') }}" alt="member-img6">
+                        </figure>
+                        <h4>James Stewart</h4>
+                        <span>Production Artist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-box">
+            <ul class="mb-0 list-unstyled">
+                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="#"><i class="fas fa-image"></i></a></li>
+                <li><a href="#"><i class="fas fa-comment-alt"></i></a></li>
+            </ul>
+        </div>
+    </section>
+    <!-- banner section -->
+{% endblock %}

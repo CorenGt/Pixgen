@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='images/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='images/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='images/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='images/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='images/favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon/favicon-16x16.png') }}">
+    <title>{% block title %}🎨 Pixgen | Modern AI Image Generator{% endblock %}</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.jsdelivr.net_npm_swiper@10_swiper-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/superclasses.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom-generator.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    
+    <!-- Modern One-Page Navbar -->
+    <header class="{% block navbar_class %}navbar-main-sec index2-navbar-sec{% endblock %} w-100 float-left">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <a class="navbar-brand" href="#home">
+                    <h3>🎨 Pixgen</h3>
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link smooth-scroll" href="#home">🏠 Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link smooth-scroll" href="#generator">🤖 AI Generator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link smooth-scroll" href="#about">ℹ️ About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link smooth-scroll" href="#faq">❓ FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link smooth-scroll" href="#contact">📞 Contact</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
+                        <li><a href="#generator" class="modern-generate-btn smooth-scroll"><i class="fas fa-magic"></i> <span>✨ Generate Now</span></a></li>
+                    </ul>
+                </form>
+            </div>
+            </nav>
+        </div>
+    </header>
+    <!-- navbar section -->
+
+    {% block content %}{% endblock %}
+
+    <!-- Modern Footer -->
+    <section class="footer-main-sec home-footer w-100 float-left padding-bottom">
+        <div class="wrapper2">
+            <div class="footer-inner-section">
+                <div class="footer-logo footer-box">
+                    <a href="#home" class="smooth-scroll">
+                        <figure>
+                            <h3 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;">🎨 Pixgen</h3>
+                        </figure>
+                    </a>
+                    <p class="mb-0">Copyright © 2024 Pixgen.</p>
+                    <p>All Rights Reserved. Made with ❤️ and AI</p>
+                    <ul class="list-unstyled mb-0">
+                        <li><span class="d-block">🌐 Connect With Us</span></li>
+                        <li class="d-inline-block ml-0"><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="d-inline-block"><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li class="d-inline-block"><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                        <li class="d-inline-block mr-0"><a href="https://pk.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer-box">
+                    <h4>🚀 Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="smooth-scroll">About Pixgen</a></li>
+                        <li><a href="#generator" class="smooth-scroll">AI Generator</a></li>
+                        <li><a href="#faq" class="smooth-scroll">FAQ</a></li>
+                        <li class="mb-0"><a href="#contact" class="smooth-scroll">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box address-box">
+                    <h4>📍 Contact Info</h4>
+                    <ul class="list-unstyled">
+                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> İstanbul / Turkey 🇹🇷</li>
+                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a href="tel:+905376555005">📞 537 655 5005</a></li>
+                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a href="mailto:batuhanyilmaz0011@gmail.com">📧 batuhanyilmaz0011@gmail.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box footer-form-box">
+                    <h4>📬 Stay Updated</h4>
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">Get the latest AI art tips and updates!</p>
+                    <ul class="list-unstyled">
+                        <li class="position-relative mb-0">
+                            <input type="email" placeholder="Enter Your Email Address" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 25px; padding: 12px 20px; color: white; width: 100%; margin-bottom: 10px;">
+                            <button style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border: none; border-radius: 25px; padding: 12px 25px; color: white; font-weight: 600; width: 100%;">Subscribe ✨</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a id="button" class="show"></a>
+    <!-- footer section-->
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cdn.jsdelivr.net_npm_swiper@10_swiper-bundle.min.js') }}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+    <script>
+        $(window).on('load', function(){ 
+            // Preloader
+            $('.loader').fadeOut();
+            $('.loader-mask').delay(350).fadeOut('slow');
+        });
+        AOS.init();
+        
+        // Modern Smooth Scroll
+        document.querySelectorAll('.smooth-scroll').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('.navbar-main-sec').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('#navbarToggle');
+                    if (navbarCollapse.classList.contains('show')) {
+                        $('.navbar-toggler').click();
+                    }
+                }
+            });
+        });
+
+        // Active nav item highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-link.smooth-scroll');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Back to top button
+        var btn = $('#button');
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+        btn.on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop:0}, '300');
+        });
+
+        // Window load
+        window.addEventListener('load',function(){
+            document.querySelector('body').classList.add("loaded")  
+        });
+
+        // Enhanced Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar-main-sec').addClass('scrolled');
+                $('.navbar-main-sec').css({
+                    'background': 'rgba(0, 0, 0, 0.98)',
+                    'backdrop-filter': 'blur(20px)',
+                    'box-shadow': '0 5px 30px rgba(0, 0, 0, 0.3)'
+                });
+            } else {
+                $('.navbar-main-sec').removeClass('scrolled');
+                $('.navbar-main-sec').css({
+                    'background': 'rgba(0, 0, 0, 0.95)',
+                    'backdrop-filter': 'blur(20px)',
+                    'box-shadow': 'none'
+                });
+            }
+        });
+
+        // Add modern navbar styles
+        const navStyle = document.createElement('style');
+        navStyle.textContent = `
+            .nav-link.smooth-scroll {
+                position: relative;
+                transition: all 0.3s ease;
+                color: rgba(255, 255, 255, 0.8) !important;
+                font-weight: 500;
+            }
+            
+            .nav-link.smooth-scroll:hover,
+            .nav-link.smooth-scroll.active {
+                color: #00fcdb !important;
+                transform: translateY(-2px);
+            }
+            
+            .nav-link.smooth-scroll::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: linear-gradient(90deg, #00fcdb, #667eea);
+                transition: all 0.3s ease;
+                transform: translateX(-50%);
+            }
+            
+            .nav-link.smooth-scroll:hover::after,
+            .nav-link.smooth-scroll.active::after {
+                width: 100%;
+            }
+            
+            .modern-generate-btn {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                padding: 10px 20px;
+                border-radius: 25px;
+                color: white !important;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: none;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .modern-generate-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(245, 87, 108, 0.4);
+                color: white !important;
+                text-decoration: none;
+            }
+            
+            .navbar-brand h3 {
+                margin: 0;
+                font-size: 1.8rem;
+            }
+            
+            @media (max-width: 768px) {
+                .navbar-nav {
+                    background: rgba(0, 0, 0, 0.95);
+                    backdrop-filter: blur(20px);
+                    border-radius: 15px;
+                    margin-top: 10px;
+                    padding: 20px;
+                }
+                
+                .nav-link.smooth-scroll {
+                    padding: 10px 0 !important;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }
+                
+                .nav-link.smooth-scroll:last-child {
+                    border-bottom: none;
+                }
+            }
+        `;
+        document.head.appendChild(navStyle);
+
+        // Newsletter subscription
+        document.querySelector('.footer-form-box button').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = this.parentElement.querySelector('input[type="email"]').value;
+            if (email) {
+                // Create notification
+                const notification = document.createElement('div');
+                notification.innerHTML = '✅ Thanks for subscribing! We\'ll keep you updated.';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #4CAF50, #45a049);
+                    color: white;
+                    padding: 15px 25px;
+                    border-radius: 15px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    opacity: 0;
+                    transform: translateX(100%);
+                    transition: all 0.3s ease;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+                
+                // Clear input
+                this.parentElement.querySelector('input[type="email"]').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
